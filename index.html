@@ -1,0 +1,164 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>倒计时</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900");
+
+        html {
+            display: grid;
+            min-height: 100%;
+        }
+
+        body {
+            display: grid;
+            background: #183059;
+        }
+
+        .container {
+            position: relative;
+            margin: auto;
+            overflow: hidden;
+            width: 650px;
+            height: 300px;
+        }
+
+        h1 {
+            font-family: "Lato", sans-serif;
+            text-align: center;
+            margin-top: 2em;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #F6F4F3;
+        }
+
+        #timer {
+            color: #F6F4F3;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: "幼圆", sans-serif;
+            font-size: .7em;
+            letter-spacing: 5px;
+        }
+
+        .computerText {
+            font-family: "幼圆", sans-serif;
+            text-align: center;
+            margin-top: 14px;
+            margin-bottom: 14px;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #F6F4F3;
+        }
+
+        .computerText span {
+            font-family: '幼圆', 'Arial Narrow', Arial, sans-serif;
+            font-size: 68px;
+            color: #d0021b;
+        }
+
+        .days, .hours, .minutes, .seconds {
+            display: inline-block;
+            padding: 20px;
+            width: 100px;
+            border-radius: 5px;
+        }
+
+        .days {
+            background: #EF2F3C;
+        }
+
+        .hours {
+            background: #F6F4F3;
+            color: #183059;
+        }
+
+        .minutes {
+            background: #276FBF;
+        }
+
+        .seconds {
+            background: #F0A202;
+        }
+
+        .numbers {
+            font-family: "Montserrat", sans-serif;
+            color: #183059;
+            font-size: 5em;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            text-transform: uppercase;
+            padding: 10px;
+            font-family: "Lato", sans-serif;
+            font-size: 0.7em;
+        }
+
+        footer p {
+            letter-spacing: 3px;
+            color: #EF2F3C;
+        }
+
+        footer a {
+            color: #F6F4F3;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #276FBF;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="computerText"><span>2024 Lunar New Year</span></div>
+    <div class="computerText"><span>2024-02-10</span></div>
+    <div id="timer"></div>
+</div>
+
+
+<script>
+    const fourthOfJuly = new Date("02 10, 2024 00:00:00").getTime();
+
+    // countdown
+    let timer = setInterval(function () {
+
+        // get today's date
+        const today = new Date().getTime();
+
+        // get the difference
+        const diff = fourthOfJuly - today;
+
+        // math
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        // display
+        document.getElementById("timer").innerHTML =
+            "<div class=\"days\"> \
+          <div class=\"numbers\">" + days + "</div>days</div> \
+<div class=\"hours\"> \
+  <div class=\"numbers\">" + hours + "</div>hours</div> \
+<div class=\"minutes\"> \
+  <div class=\"numbers\">" + minutes + "</div>minutes</div> \
+<div class=\"seconds\"> \
+  <div class=\"numbers\">" + seconds + "</div>seconds</div> \
+</div>";
+
+    }, 1000);
+</script>
+
+
+</body>
+</html>
+

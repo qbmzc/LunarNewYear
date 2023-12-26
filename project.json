@@ -1,0 +1,23 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "计算机二级倒计时",
+	"file" : "倒计时.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"tags" : [ "Unspecified" ],
+	"title" : "计算机二级倒计时",
+	"type" : "web",
+	"visibility" : "public"
+}
