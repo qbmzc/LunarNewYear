@@ -1,164 +1,206 @@
 ﻿<!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>倒计时</title>
 
     <style>
-        @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900");
+        @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@900&family=Yuanti+SC&display=swap");
 
-        html {
-            display: grid;
-            min-height: 100%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            height: 100%;
             display: grid;
-            background: #183059;
-        }
-
-        .container {
-            position: relative;
-            margin: auto;
-            overflow: hidden;
-            width: 650px;
-            height: 300px;
+            place-items: center;
+            background: linear-gradient(135deg, #183059, #1f2a44);
+            font-family: "Lato", sans-serif;
         }
 
         h1 {
-            font-family: "Lato", sans-serif;
             text-align: center;
             margin-top: 2em;
-            font-size: 1em;
-            text-transform: uppercase;
+            font-size: 1.5rem;
             letter-spacing: 5px;
             color: #F6F4F3;
         }
 
-        #timer {
-            color: #F6F4F3;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            text-transform: uppercase;
-            font-family: "幼圆", sans-serif;
-            font-size: .7em;
-            letter-spacing: 5px;
+            width: 90%;
+            max-width: 650px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .computerText {
-            font-family: "幼圆", sans-serif;
-            text-align: center;
-            margin-top: 14px;
-            margin-bottom: 14px;
+            font-family: "Yuanti SC", "Montserrat", sans-serif;
             font-size: 36px;
+            color: #F6F4F3;
+            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 5px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #timer {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-family: "Montserrat", sans-serif;
             color: #F6F4F3;
+            font-size: 2rem;
+            animation: slideIn 1.5s ease-in-out;
         }
 
-        .computerText span {
-            font-family: '幼圆', 'Arial Narrow', Arial, sans-serif;
-            font-size: 68px;
-            color: #d0021b;
-        }
-
-        .days, .hours, .minutes, .seconds {
-            display: inline-block;
+        .time-unit {
+            background: rgba(239, 47, 60, 0.8);
+            color: #F6F4F3;
+            border-radius: 10px;
             padding: 20px;
+            text-align: center;
             width: 100px;
-            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .days {
-            background: #EF2F3C;
-        }
-
-        .hours {
-            background: #F6F4F3;
-            color: #183059;
-        }
-
-        .minutes {
-            background: #276FBF;
-        }
-
-        .seconds {
-            background: #F0A202;
+        .time-unit:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(239, 47, 60, 0.4);
         }
 
         .numbers {
-            font-family: "Montserrat", sans-serif;
-            color: #183059;
-            font-size: 5em;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
         }
 
         footer {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            text-transform: uppercase;
-            padding: 10px;
-            font-family: "Lato", sans-serif;
-            font-size: 0.7em;
-        }
-
-        footer p {
-            letter-spacing: 3px;
-            color: #EF2F3C;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #F6F4F3;
+            animation: fadeIn 3s ease-in-out;
         }
 
         footer a {
-            color: #F6F4F3;
             text-decoration: none;
+            color: #F6F4F3;
+            transition: color 0.3s ease;
         }
 
         footer a:hover {
             color: #276FBF;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #timer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .time-unit {
+                margin-bottom: 10px;
+            }
+
+            .numbers {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="computerText"><span>2024 Lunar New Year</span></div>
-    <div class="computerText"><span>2024-02-10</span></div>
-    <div id="timer"></div>
+    <div class="computerText"><span>Lunar New Year</span></div>
+    <div id="timer">
+        <!-- Time Units will be injected here -->
+    </div>
+    <footer>
+        <p>Powered by chatGPT</p>
+    </footer>
 </div>
 
-
 <script>
-    const fourthOfJuly = new Date("02 10, 2024 00:00:00").getTime();
+    const fourthOfJuly = new Date("Jan 28, 2025 00:00:00").getTime();
 
-    // countdown
-    let timer = setInterval(function () {
-
-        // get today's date
+    // Function to update the timer
+    const updateTimer = () => {
         const today = new Date().getTime();
-
-        // get the difference
         const diff = fourthOfJuly - today;
 
-        // math
-        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        if (diff <= 0) {
+            clearInterval(timer); // Stop the countdown when it reaches 0
+            document.getElementById('timer').innerHTML = "<div class='time-unit'>Time's Up!</div>";
+            return;
+        }
 
-        // display
-        document.getElementById("timer").innerHTML =
-            "<div class=\"days\"> \
-          <div class=\"numbers\">" + days + "</div>days</div> \
-<div class=\"hours\"> \
-  <div class=\"numbers\">" + hours + "</div>hours</div> \
-<div class=\"minutes\"> \
-  <div class=\"numbers\">" + minutes + "</div>minutes</div> \
-<div class=\"seconds\"> \
-  <div class=\"numbers\">" + seconds + "</div>seconds</div> \
-</div>";
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    }, 1000);
+        // Display the remaining time
+        document.getElementById('timer').innerHTML = `
+            <div class="time-unit">
+                <div class="numbers">${days}</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-unit">
+                <div class="numbers">${hours}</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-unit">
+                <div class="numbers">${minutes}</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="time-unit">
+                <div class="numbers">${seconds}</div>
+                <div class="label">Seconds</div>
+            </div>
+        `;
+    };
+
+    // Start the countdown
+    const timer = setInterval(updateTimer, 1000);
 </script>
-
 
 </body>
 </html>
-
